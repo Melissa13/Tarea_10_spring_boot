@@ -1,7 +1,14 @@
 package com.example.spring_boot.entidades;
 
-public class clientes {
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
+@Entity
+public class clientes implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long cedula;
     private byte foto;
@@ -9,12 +16,13 @@ public class clientes {
     private int edad;
     private String birth_place;
     private boolean genero;
-    private historial historiales;
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
+    private Set<historial> historiales;
 
     public clientes() {
     }
 
-    public clientes(long id, long cedula, byte foto, String nombre, int edad, String birth_place, boolean genero, historial historiales) {
+    public clientes(long id, long cedula, byte foto, String nombre, int edad, String birth_place, boolean genero, Set<historial> historiales) {
         this.id = id;
         this.cedula = cedula;
         this.foto = foto;
@@ -81,11 +89,11 @@ public class clientes {
         this.genero = genero;
     }
 
-    public historial getHistoriales() {
+    public Set<historial> getHistoriales() {
         return historiales;
     }
 
-    public void setHistoriales(historial historiales) {
+    public void setHistoriales(Set<historial> historiales) {
         this.historiales = historiales;
     }
 }

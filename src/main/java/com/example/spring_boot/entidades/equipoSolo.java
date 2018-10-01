@@ -1,10 +1,19 @@
 package com.example.spring_boot.entidades;
 
-public class equipoSolo {
+import javax.persistence.*;
+import java.io.Serializable;
 
+@Entity
+public class equipoSolo implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @OneToOne()
     private equipos asociado;
     private long cantidad;
+    @ManyToOne()
+    private alquiler orden_alquiler;
 
     public equipoSolo() {
     }

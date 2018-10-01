@@ -3,8 +3,11 @@ package com.example.spring_boot.entidades;
 import javax.persistence.*;
 import java.io.Serializable;
 
-public class equipos {
+@Entity
+public class equipos implements Serializable{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nombre;
     private String familia;

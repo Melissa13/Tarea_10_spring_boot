@@ -1,11 +1,18 @@
 package com.example.spring_boot.entidades;
 
 import java.util.Date;
+import javax.persistence.*;
+import java.io.Serializable;
 
-public class historial {
+@Entity
+public class historial implements Serializable{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @ManyToOne()
     private clientes cliente;
+    @OneToOne()
     private equipos equipo;
     private long cantidad;
     private Date fecha;

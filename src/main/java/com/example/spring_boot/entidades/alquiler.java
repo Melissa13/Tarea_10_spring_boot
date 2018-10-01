@@ -2,11 +2,18 @@ package com.example.spring_boot.entidades;
 
 import java.util.Date;
 import java.util.Set;
+import javax.persistence.*;
+import java.io.Serializable;
 
-public class alquiler {
+@Entity
+public class alquiler implements Serializable{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @OneToOne()
     private clientes cliente;
+    @OneToMany(mappedBy = "orden_alquiler", fetch = FetchType.EAGER)
     private Set<equipoSolo> equipo;
     private Date fecha_prestamo;
     private Date fecha_entrega;

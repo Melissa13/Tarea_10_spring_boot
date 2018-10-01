@@ -9,11 +9,12 @@ public class clientes {
     private int edad;
     private String birth_place;
     private boolean genero;
+    private historial historiales;
 
     public clientes() {
     }
 
-    public clientes(long id, long cedula, byte foto, String nombre, int edad, String birth_place, boolean genero) {
+    public clientes(long id, long cedula, byte foto, String nombre, int edad, String birth_place, boolean genero, historial historiales) {
         this.id = id;
         this.cedula = cedula;
         this.foto = foto;
@@ -21,6 +22,7 @@ public class clientes {
         this.edad = edad;
         this.birth_place = birth_place;
         this.genero = genero;
+        this.historiales=historiales;
     }
 
     public long getId() {
@@ -77,5 +79,13 @@ public class clientes {
 
     public void setGenero(boolean genero) {
         this.genero = genero;
+    }
+
+    public historial getHistoriales() {
+        return historiales;
+    }
+
+    public void setHistoriales(historial historiales) {
+        this.historiales = historiales;
     }
 }

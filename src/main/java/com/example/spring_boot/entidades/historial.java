@@ -10,7 +10,7 @@ public class historial implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne()
+    @OneToOne()
     private clientes cliente;
     @OneToOne()
     private equipos equipo;

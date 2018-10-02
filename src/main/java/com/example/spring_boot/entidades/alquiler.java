@@ -11,24 +11,26 @@ public class alquiler implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne()
+    @ManyToOne()
     private clientes cliente;
     @OneToMany(mappedBy = "orden_alquiler", fetch = FetchType.EAGER)
     private Set<equipoSolo> equipo;
     private Date fecha_prestamo;
     private Date fecha_entrega;
     private long dias;
+    private boolean pendiente=true;
 
     public alquiler() {
     }
 
-    public alquiler(long id, clientes cliente, Set<equipoSolo> equipo, Date fecha_prestamo, Date fecha_entrega, long dias) {
+    public alquiler(long id, clientes cliente, Set<equipoSolo> equipo, Date fecha_prestamo, Date fecha_entrega, long dias, boolean pendiente) {
         this.id = id;
         this.cliente = cliente;
         this.equipo = equipo;
         this.fecha_prestamo = fecha_prestamo;
         this.fecha_entrega = fecha_entrega;
         this.dias = dias;
+        this.pendiente=pendiente;
     }
 
     public long getId() {
@@ -77,5 +79,13 @@ public class alquiler implements Serializable{
 
     public void setDias(long dias) {
         this.dias = dias;
+    }
+
+    public boolean isPendiente() {
+        return pendiente;
+    }
+
+    public void setPendiente(boolean pendiente) {
+        this.pendiente = pendiente;
     }
 }

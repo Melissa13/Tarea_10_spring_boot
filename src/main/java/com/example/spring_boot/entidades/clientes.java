@@ -17,12 +17,12 @@ public class clientes implements Serializable{
     private String birth_place;
     private boolean genero;
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
-    private Set<historial> historiales;
+    private Set<alquiler> historiales;
 
     public clientes() {
     }
 
-    public clientes(long id, long cedula, byte foto, String nombre, int edad, String birth_place, boolean genero, Set<historial> historiales) {
+    public clientes(long id, long cedula, byte foto, String nombre, int edad, String birth_place, boolean genero, Set<alquiler> historiales) {
         this.id = id;
         this.cedula = cedula;
         this.foto = foto;
@@ -89,11 +89,11 @@ public class clientes implements Serializable{
         this.genero = genero;
     }
 
-    public Set<historial> getHistoriales() {
+    public Set<alquiler> getHistoriales() {
         return historiales;
     }
 
-    public void setHistoriales(Set<historial> historiales) {
+    public void setHistoriales(Set<alquiler> historiales) {
         this.historiales = historiales;
     }
 }

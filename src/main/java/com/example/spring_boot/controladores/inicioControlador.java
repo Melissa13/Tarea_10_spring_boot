@@ -17,4 +17,10 @@ public class inicioControlador {
         model.addAttribute("title","Tarea 10- Inicio");
         return "base"; //TODO: uso de los cambios
     }
+
+    @RequestMapping(value = "/login", method=RequestMethod.GET)
+    public String login(Model model, HttpSession session){
+        model.addAttribute("title","Login");
+        return "login"; //TODO: uso de los cambios
+    }
 }

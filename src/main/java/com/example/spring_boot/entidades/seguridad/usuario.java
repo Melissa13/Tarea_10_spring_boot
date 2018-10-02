@@ -14,6 +14,16 @@ public class usuario {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<rol> roles;
 
+    public usuario() {
+    }
+
+    public usuario(String username, String password, String name, Set<rol> roles) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.roles = roles;
+    }
+
     public String getUsername() {
         return username;
     }

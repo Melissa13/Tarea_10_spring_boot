@@ -2,6 +2,7 @@ package com.example.spring_boot.entidades;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -13,7 +14,8 @@ public class clientes implements Serializable{
     private long cedula;
     private byte foto;
     private String nombre;
-    private int edad;
+    @Temporal(TemporalType.DATE)
+    private Date birth_date;
     private String birth_place;
     private boolean genero;
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
@@ -22,12 +24,12 @@ public class clientes implements Serializable{
     public clientes() {
     }
 
-    public clientes(long id, long cedula, byte foto, String nombre, int edad, String birth_place, boolean genero, Set<alquiler> historiales) {
+    public clientes(long id, long cedula, byte foto, String nombre, Date birth_date, String birth_place, boolean genero, Set<alquiler> historiales) {
         this.id = id;
         this.cedula = cedula;
         this.foto = foto;
         this.nombre = nombre;
-        this.edad = edad;
+        this.birth_date = birth_date;
         this.birth_place = birth_place;
         this.genero = genero;
         this.historiales=historiales;
@@ -65,12 +67,12 @@ public class clientes implements Serializable{
         this.nombre = nombre;
     }
 
-    public int getEdad() {
-        return edad;
+    public Date getEdad() {
+        return birth_date;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setEdad(Date edad) {
+        this.birth_date = edad;
     }
 
     public String getBirth_place() {

@@ -15,7 +15,9 @@ public class alquiler implements Serializable{
     private clientes cliente;
     @OneToMany(mappedBy = "orden_alquiler", fetch = FetchType.EAGER)
     private Set<equipoSolo> equipo;
+    @Temporal(TemporalType.DATE)
     private Date fecha_prestamo;
+    @Temporal(TemporalType.DATE)
     private Date fecha_entrega;
     private long dias;
     private boolean pendiente=true;

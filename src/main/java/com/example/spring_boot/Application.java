@@ -44,5 +44,16 @@ public class Application {
         for (clientes cc:client){
             System.out.println("NOMBRE:"+cc.getNombre()+" ID:"+cc.getId()+" NACIMIENTO: "+ cc.getNacimiento()+" CEDULA:"+ cc.getCedula()+" LUGAR: "+cc.getBirth_place());
         }
+
+        Long id= 1L;
+        clientes c=clientRep.buscar(id);
+
+        System.out.println("NOMBRE:"+c.getNombre()+" ID:"+c.getId());
+
+        //c.setNombre("Missing");
+
+        //clientRep.save(c);
+
+
     }
 }

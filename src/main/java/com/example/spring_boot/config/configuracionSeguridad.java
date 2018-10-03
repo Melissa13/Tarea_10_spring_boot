@@ -21,7 +21,7 @@ public class configuracionSeguridad extends WebSecurityConfigurerAdapter{
         //Marcando las reglas para permitir unicamente los usuarios
         http
                 .authorizeRequests()
-                .antMatchers("/").permitAll() //permitiendo llamadas a esas urls.
+                .antMatchers("/","/client/**").permitAll() //permitiendo llamadas a esas urls.
                 .antMatchers("/dbconsole/**").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ADMIN", "USER")
                 //.anyRequest().authenticated() //cualquier llamada debe ser validada

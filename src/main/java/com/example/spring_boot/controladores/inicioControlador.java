@@ -44,6 +44,6 @@ public class inicioControlador {
     public String prueba(Model model, HttpSession session){
 
         model.addAttribute("title","Clientes- Inicio");
-        return "clientes"; //TODO: uso de los cambios
+        return "index"; //TODO: uso de los cambios
     }
 }

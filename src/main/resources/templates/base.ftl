@@ -1,3 +1,4 @@
+<#import "/spring.ftl" as spring />
 
 <!DOCTYPE html>
 <html>
@@ -68,7 +69,7 @@
                 </a>
             </li>
             <li>
-                <a href="/client/">
+                <a href="/client/" class="letra-color">
                     <span class="rect"></span>
                     <span class="circle"></span>
                     Clientes

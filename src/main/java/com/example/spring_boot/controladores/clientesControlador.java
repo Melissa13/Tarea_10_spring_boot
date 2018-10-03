@@ -5,6 +5,8 @@ import com.example.spring_boot.repositorios.ClientesRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +23,27 @@ public class clientesControlador {
     @RequestMapping(value = "/", method=RequestMethod.GET)
     public String index(Model model, HttpSession session){
 
+        model.addAttribute("title","Clientes- Inicio");
+        return "clientes"; //TODO: uso de los cambios
+    }
+
+    @RequestMapping(value = "/add", method=RequestMethod.GET)
+    public String agregar(Model model){
+
+        clientes cliente = new clientes();
+        model.addAttribute("cliente", cliente);
+
+        model.addAttribute("title","Clientes- Inicio");
+        return "cliente_agregar"; //TODO: uso de los cambios
+    }
+
+    @RequestMapping(value = "/add", method=RequestMethod.POST)
+    public String agregar2(Model model, @ModelAttribute("cliente") clientes cliente, BindingResult bindingResult){
+
+        if (!bindingResult.hasErrors()) {
+            System.out.println("LLEGO AQUI, ERROR");
+        }
+        System.out.println("LLEGO AQUI");
         model.addAttribute("title","Clientes- Inicio");
         return "clientes"; //TODO: uso de los cambios
     }

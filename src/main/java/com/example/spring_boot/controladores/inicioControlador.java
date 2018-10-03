@@ -26,7 +26,7 @@ public class inicioControlador {
     public String index(Model model, HttpSession session){
 
         model.addAttribute("title","Tarea 10- Inicio");
-        return "base"; //TODO: uso de los cambios
+        return "inicio"; //TODO: uso de los cambios
     }
 
     @RequestMapping(value = "/login", method=RequestMethod.GET)
@@ -43,7 +43,7 @@ public class inicioControlador {
     @RequestMapping(value = "/prueba", method=RequestMethod.GET)
     public String prueba(Model model, HttpSession session){
 
-        model.addAttribute("title","Tarea 10- Inicio");
-        return "base"; //TODO: uso de los cambios
+        model.addAttribute("title","Clientes- Inicio");
+        return "clientes"; //TODO: uso de los cambios
     }
 }

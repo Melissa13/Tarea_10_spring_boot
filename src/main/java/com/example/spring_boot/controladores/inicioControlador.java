@@ -24,15 +24,6 @@ public class inicioControlador {
 
     @RequestMapping(value = "/", method=RequestMethod.GET)
     public String index(Model model, HttpSession session){
-        Long l=1234L;
-        Date today = Calendar.getInstance().getTime();
-        clientes c=new clientes();
-        c.setNacimiento(today);
-        c.setCedula(l);
-        c.setGenero(false);
-        c.setNombre("Matias");
-        c.setBirth_place("Tenares");
-        clientRep.save(c);
 
         model.addAttribute("title","Tarea 10- Inicio");
         return "base"; //TODO: uso de los cambios

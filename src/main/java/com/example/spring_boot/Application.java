@@ -26,7 +26,7 @@ public class Application {
 
         ClientesRepositorio clientRep = (ClientesRepositorio) applicationContext.getBean("clientesRepositorio");
 
-        Long l=123L;
+       /* Long l=123L;
         Date today = Calendar.getInstance().getTime();
         clientes c=new clientes();
         c.setNacimiento(today);
@@ -34,7 +34,7 @@ public class Application {
         c.setGenero(false);
         c.setNombre("Pedro");
         c.setBirth_place("Santiago");
-        clientRep.save(c);
+        clientRep.save(c);*/
 
 
 

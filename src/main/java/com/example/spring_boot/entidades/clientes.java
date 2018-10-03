@@ -67,11 +67,11 @@ public class clientes implements Serializable{
         this.nombre = nombre;
     }
 
-    public Date getEdad() {
+    public Date getNacimiento() {
         return birth_date;
     }
 
-    public void setEdad(Date edad) {
+    public void setNacimiento(Date edad) {
         this.birth_date = edad;
     }
 

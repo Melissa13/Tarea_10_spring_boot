@@ -116,4 +116,14 @@ public class alquiler implements Serializable{
         Date today = Calendar.getInstance().getTime();
         return (long) ( (d1.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
     }
+
+    public long total(){
+        long suma=0;
+
+        for(equipoSolo e: equipo){
+            suma+=e.getCantidad()*e.getAsociado().getCosto();
+        }
+
+        return suma;
+    }
 }

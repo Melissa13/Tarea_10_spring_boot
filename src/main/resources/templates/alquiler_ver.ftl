@@ -84,6 +84,14 @@
             <h2> No hay equipos registrados en el Sistema</h2>
         </center>
         </#if>
+    <legend></legend>
+    <legend></legend>
+    <div class="section-heading separador">
+        <center><h1><em>Costo total</em> - ${alquiler.total()}</h1></center>
+    </div>
+    <br/>
+    <br/>
+
     <#else >
         <center>
             <h2> No Existe tal alquiler</h2>

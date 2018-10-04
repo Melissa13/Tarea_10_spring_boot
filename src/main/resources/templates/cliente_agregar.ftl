@@ -24,7 +24,7 @@
             <div class="row2">
                 <div class="col-md-4 input-separador">
                     <label>Fecha de Nacimiento(dd/mm/yyyy)</label>
-                    <@spring.formInput "cliente.birth_date" "placeholder='nombre...' class='form-control'" "date"/>
+                    <@spring.formInput "cliente.extra" "placeholder='nombre...' class='form-control'" "date"/>
                 </div>
                 <div class="col-md-4 input-separadorb">
                     <label>Lugar de nacimiento</label>

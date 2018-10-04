@@ -26,10 +26,10 @@ public class Application {
 
         ClientesRepositorio clientRep = (ClientesRepositorio) applicationContext.getBean("clientesRepositorio");
 
-       /* Long l=123L;
+        /*Long l=123L;
         Date today = Calendar.getInstance().getTime();
         clientes c=new clientes();
-        c.setNacimiento(today);
+        c.setBirth_date(today);
         c.setCedula(l);
         c.setGenero("Masculino");
         c.setNombre("Pedro");
@@ -46,9 +46,9 @@ public class Application {
         }
 
         Long id= 1L;
-        clientes c=clientRep.buscar(id);
+        clientes ac=clientRep.buscar(id);
 
-        System.out.println("NOMBRE:"+c.getNombre()+" ID:"+c.getId());
+        System.out.println("NOMBRE:"+ac.getNombre()+" ID:"+ac.getId());
 
         //c.setNombre("Missing");
 

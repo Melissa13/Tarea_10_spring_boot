@@ -1,5 +1,7 @@
 package com.example.spring_boot.entidades;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -14,12 +16,13 @@ public class clientes implements Serializable{
     private long cedula;
     private byte foto;
     private String nombre;
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="dd/MM/yyyy")
     private Date birth_date;
     private String birth_place;
     private String genero;
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
     private Set<alquiler> historiales;
+    private String extra;
 
     public clientes() {
     }
@@ -97,5 +100,13 @@ public class clientes implements Serializable{
 
     public void setHistoriales(Set<alquiler> historiales) {
         this.historiales = historiales;
+    }
+
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
     }
 }

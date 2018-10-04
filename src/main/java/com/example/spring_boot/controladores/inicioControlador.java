@@ -34,7 +34,7 @@ public class inicioControlador {
         List<clientes> client= clientRep.findAll();
         System.out.println(" ----CLIENTES---");
         for (clientes cc:client){
-            System.out.println("NOMBRE:"+cc.getNombre()+" ID:"+cc.getId()+" NACIMIENTO: "+ cc.getNacimiento()+" CEDULA:"+ cc.getCedula()+" LUGAR: "+cc.getBirth_place());
+            System.out.println("NOMBRE:"+cc.getNombre()+" ID:"+cc.getId()+" NACIMIENTO: "+ cc.getBirth_date()+" CEDULA:"+ cc.getCedula()+" LUGAR: "+cc.getBirth_place());
         }
         model.addAttribute("title","Login");
         return "login"; //TODO: uso de los cambios

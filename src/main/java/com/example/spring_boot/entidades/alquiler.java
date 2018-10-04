@@ -1,6 +1,7 @@
 package com.example.spring_boot.entidades;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,11 +22,15 @@ public class alquiler implements Serializable{
     private Date fecha_entrega;
     private long dias;
     private boolean pendiente=true;
+    private String extra1;
+    private String extra2;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<equipos> equipo2;
 
     public alquiler() {
     }
 
-    public alquiler(long id, clientes cliente, Set<equipoSolo> equipo, Date fecha_prestamo, Date fecha_entrega, long dias, boolean pendiente) {
+    public alquiler(long id, clientes cliente, Set<equipoSolo> equipo, Date fecha_prestamo, Date fecha_entrega, long dias, boolean pendiente, String extra1, String extra2, List<equipos> equipo2) {
         this.id = id;
         this.cliente = cliente;
         this.equipo = equipo;
@@ -33,6 +38,9 @@ public class alquiler implements Serializable{
         this.fecha_entrega = fecha_entrega;
         this.dias = dias;
         this.pendiente=pendiente;
+        this.extra1=extra1;
+        this.extra2=extra2;
+        this.equipo2=equipo2;
     }
 
     public long getId() {
@@ -89,5 +97,29 @@ public class alquiler implements Serializable{
 
     public void setPendiente(boolean pendiente) {
         this.pendiente = pendiente;
+    }
+
+    public String getExtra1() {
+        return extra1;
+    }
+
+    public void setExtra1(String extra1) {
+        this.extra1 = extra1;
+    }
+
+    public String getExtra2() {
+        return extra2;
+    }
+
+    public void setExtra2(String extra2) {
+        this.extra2 = extra2;
+    }
+
+    public List<equipos> getEquipo2() {
+        return equipo2;
+    }
+
+    public void setEquipo2(List<equipos> equipo2) {
+        this.equipo2 = equipo2;
     }
 }

@@ -13,33 +13,25 @@
         <form action="/alquiler/add" method="post">
             <div class="row2">
                 <div class="col-md-4 input-separador">
-                    <label>Nombre</label>
-                    <@spring.formInput "equipo.nombre" "placeholder='Nombre...' class='form-control'" "text"/>
+                    <label>Cliente</label>
+                    <@spring.formSingleSelect "equipo.cliente", opcion, "class='form-control' style='width: 370px'"/>
                 </div>
                 <div class="col-md-4 input-separadorb">
-                    <label>Cantidad</label>
-                    <@spring.formInput "equipo.cantidad" "placeholder='0' class='form-control'" "number"/>
+                    <label>Equipos(Por defecto 1 canidad)</label>
+                    <@spring.formMultiSelect "equipo.equipo2", opcion2, "class='form-control' style='width: 370px'"/>
                 </div>
             </div>
             <div class="row2">
                 <div class="col-md-4 input-separador">
-                    <label>Familia</label>
-                    <@spring.formInput "equipo.familia" "placeholder='Familia...' class='form-control'" "text"/>
+                    <label>Fecha del prestamo</label>
+                    <@spring.formInput "equipo.extra1" "class='form-control'" "date"/>
                 </div>
                 <div class="col-md-4 input-separadorb">
-                    <label>Sub-Familia</label>
-                    <@spring.formInput "equipo.sub_familia" "placeholder='Sub-familia...' class='form-control'" "text"/>
+                    <label>Fecha de entrega</label>
+                    <@spring.formInput "equipo.extra2" "class='form-control'" "date"/>
                 </div>
             </div>
             <br/>
-            <div class="row2">
-                <center>
-                    <div style="margin-left: 510px; margin-top: 20px">
-                        <label>Costo por unidad ($RD)</label>
-                        <@spring.formInput "equipo.costo" "placeholder='0' class='form-control'" "number"/>
-                    </div>
-                </center>
-            </div>
             <br/>
             <legend></legend>
             <div class="row2">

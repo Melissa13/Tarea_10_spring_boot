@@ -33,14 +33,8 @@ public class equiposControlador {
     public String agregar(Model model){
 
         equipos equipo = new equipos();
-        List<String> opciones=new ArrayList<>();
-        opciones.add("Masculino");
-        opciones.add("Femenino");
-        String fecha=new String();
 
         model.addAttribute("equipo", equipo);
-        model.addAttribute("opcion", opciones);
-        model.addAttribute("fecha",fecha);
 
         model.addAttribute("title","Equipos- Agregar");
         return "equipos_agregar"; //TODO: uso de los cambios
@@ -58,6 +52,7 @@ public class equiposControlador {
         ingresar.setSub_familia(equipo.getSub_familia());
         ingresar.setCantidad(equipo.getCantidad());
         ingresar.setCosto(equipo.getCosto());
+        ingresar.setDisponibles(equipo.getCantidad());
         equipRep.save(ingresar);
 
         //System.out.println(" ----CLIENTES---");
@@ -113,6 +108,7 @@ public class equiposControlador {
         ingresar.setSub_familia(equipo.getSub_familia());
         ingresar.setCantidad(equipo.getCantidad());
         ingresar.setCosto(equipo.getCosto());
+        ingresar.setDisponibles(equipo.getCantidad());
         equipRep.save(ingresar);
 
         //System.out.println(" ----CLIENTES---");

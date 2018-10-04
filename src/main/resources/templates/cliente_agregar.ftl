@@ -41,6 +41,9 @@
                 </center>
             </div>
             <br/>
+            <br/>
+            <br/>
+            <br/>
             <legend></legend>
             <div class="row2">
                 <div class="col-md-12">
@@ -50,6 +53,8 @@
                 </div>
             </div>
         </form>
+        <br/>
+        <br/>
     </div>
 </section>
 </#macro>

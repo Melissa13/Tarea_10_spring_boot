@@ -15,11 +15,12 @@ public class equipos implements Serializable{
     private long cantidad;
     private long costo;
     private byte imagen;
+    private long disponibles;
 
     public equipos() {
     }
 
-    public equipos(long id, String nombre, String familia, String sub_familia, long cantidad, long costo, byte imagen) {
+    public equipos(long id, String nombre, String familia, String sub_familia, long cantidad, long costo, byte imagen, long disponibles) {
         this.id = id;
         this.nombre = nombre;
         this.familia = familia;
@@ -27,6 +28,7 @@ public class equipos implements Serializable{
         this.cantidad = cantidad;
         this.costo = costo;
         this.imagen = imagen;
+        this.disponibles=disponibles;
     }
 
     public long getId() {
@@ -83,5 +85,13 @@ public class equipos implements Serializable{
 
     public void setImagen(byte imagen) {
         this.imagen = imagen;
+    }
+
+    public long getDisponibles() {
+        return disponibles;
+    }
+
+    public void setDisponibles(long disponibles) {
+        this.disponibles = disponibles;
     }
 }

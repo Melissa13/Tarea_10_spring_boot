@@ -19,8 +19,13 @@ import java.util.List;
 @Controller
 @RequestMapping("/alquiler")
 public class alquilerControlador {
+
     @Autowired
     public AlquilerRepositorio alquilerRep;
+    @Autowired
+    public ClientesRepositorio clientRep;
+    @Autowired
+    public EquiposRepositorio equipRep;
 
     @RequestMapping(value = "/", method=RequestMethod.GET)
     public String index(Model model, HttpSession session){
@@ -33,14 +38,18 @@ public class alquilerControlador {
     public String agregar(Model model){
 
         alquiler equipo = new alquiler();
-        List<String> opciones=new ArrayList<>();
-        opciones.add("Masculino");
-        opciones.add("Femenino");
-        String fecha=new String();
+        List<clientes> opcion1=clientRep.findAll();
+        List<equipos> opcion2=equipRep.findAll();
+        List<String> esto=new ArrayList<>();
+        esto.add("uno");
+        esto.add("dos");
+        esto.add("tres");
+        esto.add("cuatro");
+        esto.add("cinco");
 
         model.addAttribute("equipo", equipo);
-        model.addAttribute("opcion", opciones);
-        model.addAttribute("fecha",fecha);
+        model.addAttribute("opcion", opcion1);
+        model.addAttribute("opcion2",esto);
 
         model.addAttribute("title","Alquiler- Agregar");
         return "alquiler_agregar"; //TODO: uso de los cambios

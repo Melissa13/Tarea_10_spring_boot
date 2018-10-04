@@ -16,8 +16,8 @@
             <h4>${equipo.getNombre()}</h4>
         </div>
         <div class="col-md-4 input-separadorb">
-            <label>Cantidad</label>
-            <h4>${equipo.getCantidad()?string["0"]}</h4>
+            <label>Costo por unidad ($RD)</label>
+            <h4>${equipo.getCosto()?string["0"]}</h4>
         </div>
     </div>
             <div class="row2">
@@ -31,12 +31,14 @@
                 </div>
             </div>
             <div class="row2">
-                <center>
-                    <div style="margin-left: 560px; margin-top: 20px">
-                        <label>Costo por unidad ($RD)</label>
-                        <h4>${equipo.getCosto()?string["0"]}</h4>
-                    </div>
-                </center>
+                <div class="col-md-4 input-separador">
+                    <label>Cantidad</label>
+                    <h4>${equipo.getCantidad()?string["0"]}</h4>
+                </div>
+                <div class="col-md-4 input-separadorb">
+                    <label>Disponibles</label>
+                    <h4>${equipo.getDisponibles()?string["0"]}</h4>
+                </div>
             </div>
     <#else >
         <center>

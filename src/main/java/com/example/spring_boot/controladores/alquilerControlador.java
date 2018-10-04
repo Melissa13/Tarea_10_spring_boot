@@ -143,10 +143,15 @@ public class alquilerControlador {
     public String borrar(@PathVariable Long id, Model model){
 
         alquiler cc=alquilerRep.buscar(id);
+        for(equipoSolo esto:cc.getEquipo()){
+            equipoSolo eliminar=esto;
+            equipssRep.delete(eliminar);
+
+        }
         alquilerRep.delete(cc);
 
         model.addAttribute("title","Alquiler- Borrar");
-        return "redirect:/equipo/lista/"; //TODO: uso de los cambios
+        return "redirect:/alquiler/lista/"; //TODO: uso de los cambios
     }
 
     @RequestMapping(value = "/edit/{id}", method=RequestMethod.GET)

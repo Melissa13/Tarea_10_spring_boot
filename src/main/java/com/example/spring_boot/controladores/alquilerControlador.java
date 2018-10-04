@@ -34,6 +34,9 @@ public class alquilerControlador {
         for (alquiler lita:litapp2){
             System.out.println("ID: "+lita.getId()+" cliente:"+lita.getCliente().getNombre()+" fecha1:" +lita.getExtra1()+" fecha2:"+lita.getExtra2()+" equipos"+ lita.getEquipo().size());
 
+            Date today = Calendar.getInstance().getTime();
+            System.out.println(" DEL DIA 1:"+daysBetween(today,lita.getFecha_prestamo()));
+            System.out.println(" DEL DIA 3:"+daysBetween(today,lita.getFecha_entrega()));
         }*/
 
 
@@ -120,10 +123,6 @@ public class alquilerControlador {
             equipssRep.save(ess);
         }
 
-        List<alquiler> litapp2=alquilerRep.buscarUltimo();
-        alquiler lita=litapp2.get(0);
-        System.out.println("ID: "+lita.getId()+" cliente:"+lita.getCliente().getNombre()+" fecha1:" +lita.getExtra1()+" fecha2:"+lita.getExtra2()+" equipos"+ lita.getEquipo().size());
-
 
         return "redirect:/alquiler/"; //TODO: uso de los cambios
     }
@@ -191,10 +190,48 @@ public class alquilerControlador {
     public String vista(@PathVariable Long id, Model model){
 
         alquiler cc=alquilerRep.buscar(id);
-        model.addAttribute("equipo", cc);
+        model.addAttribute("alquiler", cc);
 
         model.addAttribute("title","Alquiler-datos");
         return "alquiler_ver"; //TODO: uso de los cambios
+    }
+
+    @RequestMapping(value = "/mas/{id}", method=RequestMethod.GET)
+    public String sumar(@PathVariable Long id, Model model){
+
+        alquiler cc=alquilerRep.buscar(id);
+
+        model.addAttribute("title","Equipos- Inicio");
+        return "alquiler"; //TODO: uso de los cambios
+    }
+
+    @RequestMapping(value = "/menos/{id}", method=RequestMethod.GET)
+    public String restar(@PathVariable Long id, Model model){
+
+        alquiler cc=alquilerRep.buscar(id);
+
+        model.addAttribute("title","Equipos- Inicio");
+        return "alquiler"; //TODO: uso de los cambios
+    }
+
+    //agregar equipos asociados
+    @RequestMapping(value = "/quitar/{id}", method=RequestMethod.GET)
+    public String quitar(@PathVariable Long id, Model model){
+
+        alquiler cc=alquilerRep.buscar(id);
+
+        model.addAttribute("title","Equipos- Inicio");
+        return "alquiler"; //TODO: uso de los cambios
+    }
+
+    //quitar equipos asociados
+    @RequestMapping(value = "/agregar/{id}", method=RequestMethod.GET)
+    public String agregareq(@PathVariable Long id, Model model){
+
+        alquiler cc=alquilerRep.buscar(id);
+
+        model.addAttribute("title","Equipos- Inicio");
+        return "alquiler"; //TODO: uso de los cambios
     }
 
     public long daysBetween(Date d1, Date d2) {

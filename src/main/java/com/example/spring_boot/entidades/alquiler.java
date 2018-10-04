@@ -1,5 +1,6 @@
 package com.example.spring_boot.entidades;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.*;
@@ -109,5 +110,10 @@ public class alquiler implements Serializable{
 
     public void setExtra2(String extra2) {
         this.extra2 = extra2;
+    }
+
+    public long days(Date d1) {
+        Date today = Calendar.getInstance().getTime();
+        return (long) ( (today.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
     }
 }

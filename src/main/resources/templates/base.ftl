@@ -47,7 +47,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="/">Inicio</a></li>
                 <li><a href="/client/">Clientes</a></li>
-                <li><a href="#projects">Equipos</a></li>
+                <li><a href="/equipo/">Equipos</a></li>
                 <li><a href="#video">Alquiler</a></li>
                 <li><a href="#blog">Historial</a></li>
                 <li><a href="#contact">Contact Us</a></li>
@@ -76,7 +76,7 @@
                 </a>
             </li>
             <li>
-                <a href="#projects">
+                <a href="/equipo/" class="letra-color">
                     <span class="rect"></span>
                     <span class="circle"></span>
                     Equipos

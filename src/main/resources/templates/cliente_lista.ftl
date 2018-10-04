@@ -8,10 +8,11 @@
         <center><h1><em>Clientes</em> - Lista</h1></center>
     </div>
     <legend></legend>
-    <div>
+    <div >
 
     <#if lista??>
         <center>
+            <div style="overflow-x:auto;">
             <table>
                 <tr><th>Cedula</th>
                     <th>Nombre</th>
@@ -28,6 +29,7 @@
                                 </tr>
                                 </#list>
             </table>
+            </div>
         </center>
     <#else >
         <center>

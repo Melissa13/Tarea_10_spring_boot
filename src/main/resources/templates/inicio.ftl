@@ -9,12 +9,11 @@
                 <div class="image"></div>
                 <div class="info">
                     <div>
-                        <h1>Beautiful Template<br>Sentra</h1>
-                        <p>This is a HTML CSS template provided by
-                            <a href="https://plus.google.com/+templatemo" target="_blank">templatemo</a> website.<br>
-                            Please tell your friends about our site.</p>
+                        <h1>Aguega Clientes</h1>
+                        <p>Sientete libre de agregar nuevos clientes al website.<br>
+                            Ademas de poder gestionar tolo lo relacionado a ellos.</p>
                         <div class="white-button button">
-                            <a href="#featured">Discover More</a>
+                            <a href="/client/">Ver mas</a>
                         </div>
                     </div>
                 </div>
@@ -27,12 +26,12 @@
                 <div class="image"></div>
                 <div class="info">
                     <div>
-                        <h1>Lorem ipsum <br>dolor</h1>
-                        <p>Phasellus luctus odio eget dui imperdiet, at pulvinar ante convallis.
-                            <br>Proin sit amet fringilla erat.</p>
+                        <h1>Aguega equipos</h1>
+                        <p>Sientete libre de agregar nuevos equipos al website.<br>
+                            Ademas de poder gestionar tolo lo relacionado a ellos.</p>
 
                         <div class="white-button button">
-                            <a href="#featured">Discover More</a>
+                            <a href="/equipo/">Ver mas</a>
                         </div>
                     </div>
                 </div>

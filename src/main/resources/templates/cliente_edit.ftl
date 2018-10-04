@@ -45,7 +45,7 @@
             <div class="row2">
                 <div class="col-md-12">
                     <fieldset>
-                        <input type="submit" value="Agregar" class="btn-normal btn-extra">
+                        <input type="submit" value="Editar" class="btn-normal btn-extra">
                     </fieldset>
                 </div>
             </div>

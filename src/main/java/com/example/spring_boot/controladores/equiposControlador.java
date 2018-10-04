@@ -93,12 +93,8 @@ public class equiposControlador {
     public String editar(@PathVariable Long id,Model model){
 
         equipos cc=equipRep.buscar(id);
-        List<String> opciones=new ArrayList<>();
-        opciones.add("Masculino");
-        opciones.add("Femenino");
 
         model.addAttribute("equipo", cc);
-        model.addAttribute("opcion", opciones);
 
         model.addAttribute("title","Equipos- Editar");
         return "equipos_edit"; //TODO: uso de los cambios

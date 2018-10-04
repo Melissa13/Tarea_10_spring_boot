@@ -48,7 +48,7 @@
                 <li><a href="/">Inicio</a></li>
                 <li><a href="/client/">Clientes</a></li>
                 <li><a href="/equipo/">Equipos</a></li>
-                <li><a href="#video">Alquiler</a></li>
+                <li><a href="/alquiler/">Alquiler</a></li>
                 <li><a href="#blog">Historial</a></li>
                 <li><a href="#contact">Contact Us</a></li>
             </ul>
@@ -83,7 +83,7 @@
                 </a>
             </li>
             <li>
-                <a href="#video">
+                <a href="/alquiler/" class="letra-color">
                     <span class="rect"></span>
                     <span class="circle"></span>
                     Alquiler

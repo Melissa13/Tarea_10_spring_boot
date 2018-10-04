@@ -20,19 +20,19 @@ import java.util.List;
 @RequestMapping("/alquiler")
 public class alquilerControlador {
     @Autowired
-    public EquiposRepositorio equipRep;
+    public AlquilerRepositorio alquilerRep;
 
     @RequestMapping(value = "/", method=RequestMethod.GET)
     public String index(Model model, HttpSession session){
 
         model.addAttribute("title","Equipos- Inicio");
-        return "equipos"; //TODO: uso de los cambios
+        return "alquiler"; //TODO: uso de los cambios
     }
 
     @RequestMapping(value = "/add", method=RequestMethod.GET)
     public String agregar(Model model){
 
-        equipos equipo = new equipos();
+        alquiler equipo = new alquiler();
         List<String> opciones=new ArrayList<>();
         opciones.add("Masculino");
         opciones.add("Femenino");
@@ -42,23 +42,23 @@ public class alquilerControlador {
         model.addAttribute("opcion", opciones);
         model.addAttribute("fecha",fecha);
 
-        model.addAttribute("title","Equipos- Agregar");
-        return "equipos_agregar"; //TODO: uso de los cambios
+        model.addAttribute("title","Alquiler- Agregar");
+        return "alquiler_agregar"; //TODO: uso de los cambios
     }
 
     @RequestMapping(value = "/add", method=RequestMethod.POST)
-    public String agregar2(Model model, @ModelAttribute("equipo") equipos equipo, BindingResult bindingResult){
+    public String agregar2(Model model, @ModelAttribute("equipo") alquiler equipo, BindingResult bindingResult){
 
         if (bindingResult.hasErrors()) {
         }
 
-        equipos ingresar=new equipos();
-        ingresar.setNombre(equipo.getNombre());
-        ingresar.setFamilia(equipo.getFamilia());
-        ingresar.setSub_familia(equipo.getSub_familia());
-        ingresar.setCantidad(equipo.getCantidad());
-        ingresar.setCosto(equipo.getCosto());
-        equipRep.save(ingresar);
+        alquiler ingresar=new alquiler();
+        //ingresar.setNombre(equipo.getNombre());
+        //ingresar.setFamilia(equipo.getFamilia());
+        //ingresar.setSub_familia(equipo.getSub_familia());
+        //ingresar.setCantidad(equipo.getCantidad());
+        //ingresar.setCosto(equipo.getCosto());
+        alquilerRep.save(ingresar);
 
         //System.out.println(" ----CLIENTES---");
 
@@ -71,49 +71,49 @@ public class alquilerControlador {
     @RequestMapping(value = "/lista", method=RequestMethod.GET)
     public String lista(Model model){
 
-        List<equipos> equipo= equipRep.findAll();
+        List<alquiler> equipo= alquilerRep.findAll();
 
 
         model.addAttribute("lista", equipo);
-        model.addAttribute("title","Equipos- Lista");
-        return "equipos_lista"; //TODO: uso de los cambios
+        model.addAttribute("title","Alquiler- Lista");
+        return "alquiler_lista"; //TODO: uso de los cambios
     }
 
     @RequestMapping(value = "/delete/{id}", method=RequestMethod.GET)
     public String borrar(@PathVariable Long id, Model model){
 
-        equipos cc=equipRep.buscar(id);
-        equipRep.delete(cc);
+        alquiler cc=alquilerRep.buscar(id);
+        alquilerRep.delete(cc);
 
-        model.addAttribute("title","Equipos- Borrar");
+        model.addAttribute("title","Alquiler- Borrar");
         return "redirect:/equipo/lista/"; //TODO: uso de los cambios
     }
 
     @RequestMapping(value = "/edit/{id}", method=RequestMethod.GET)
     public String editar(@PathVariable Long id,Model model){
 
-        equipos cc=equipRep.buscar(id);
+        alquiler cc=alquilerRep.buscar(id);
 
         model.addAttribute("equipo", cc);
 
-        model.addAttribute("title","Equipos- Editar");
-        return "equipos_edit"; //TODO: uso de los cambios
+        model.addAttribute("title","Alquiler- Editar");
+        return "alquiler_edit"; //TODO: uso de los cambios
     }
 
     @RequestMapping(value = "/edit/{id}", method=RequestMethod.POST)
-    public String editar2(@PathVariable Long id,Model model, @ModelAttribute("equipo") equipos equipo, BindingResult bindingResult){
+    public String editar2(@PathVariable Long id,Model model, @ModelAttribute("equipo") alquiler equipo, BindingResult bindingResult){
 
         if (bindingResult.hasErrors()) {
         }
-        equipos ingresar=equipRep.buscar(id);
+        alquiler ingresar=alquilerRep.buscar(id);
 
-        ingresar.setNombre(equipo.getNombre());
-        ingresar.setNombre(equipo.getNombre());
-        ingresar.setFamilia(equipo.getFamilia());
-        ingresar.setSub_familia(equipo.getSub_familia());
-        ingresar.setCantidad(equipo.getCantidad());
-        ingresar.setCosto(equipo.getCosto());
-        equipRep.save(ingresar);
+        //ingresar.setNombre(equipo.getNombre());
+        //ingresar.setNombre(equipo.getNombre());
+        //ingresar.setFamilia(equipo.getFamilia());
+        //ingresar.setSub_familia(equipo.getSub_familia());
+        //ingresar.setCantidad(equipo.getCantidad());
+        //ingresar.setCosto(equipo.getCosto());
+        alquilerRep.save(ingresar);
 
         //System.out.println(" ----CLIENTES---");
         //System.out.println("NOMBRE:"+equipo.getNombre()+" CEDULA:"+ equipo.getCedula()+" fecha:"+ingresar.getBirth_date());
@@ -125,10 +125,10 @@ public class alquilerControlador {
     @RequestMapping(value = "/ver/{id}", method=RequestMethod.GET)
     public String vista(@PathVariable Long id, Model model){
 
-        equipos cc=equipRep.buscar(id);
+        alquiler cc=alquilerRep.buscar(id);
         model.addAttribute("equipo", cc);
 
-        model.addAttribute("title","Equipos-datos");
-        return "equipos_ver"; //TODO: uso de los cambios
+        model.addAttribute("title","Alquiler-datos");
+        return "alquiler_ver"; //TODO: uso de los cambios
     }
 }

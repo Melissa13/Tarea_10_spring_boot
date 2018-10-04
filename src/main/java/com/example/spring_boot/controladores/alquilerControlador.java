@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/alquiler")
@@ -26,9 +23,19 @@ public class alquilerControlador {
     public ClientesRepositorio clientRep;
     @Autowired
     public EquiposRepositorio equipRep;
+    @Autowired
+    public EquiopoSoloRepositorio equipssRep;
 
     @RequestMapping(value = "/", method=RequestMethod.GET)
     public String index(Model model, HttpSession session){
+
+        /*List<alquiler> litapp2=alquilerRep.buscarUltimo();
+        //alquiler lita=litapp2.get(0);
+        for (alquiler lita:litapp2){
+            System.out.println("ID: "+lita.getId()+" cliente:"+lita.getCliente().getNombre()+" fecha1:" +lita.getExtra1()+" fecha2:"+lita.getExtra2()+" equipos"+ lita.getEquipo().size());
+
+        }*/
+
 
         model.addAttribute("title","Equipos- Inicio");
         return "alquiler"; //TODO: uso de los cambios
@@ -40,41 +47,85 @@ public class alquilerControlador {
         alquiler equipo = new alquiler();
         List<clientes> opcion1=clientRep.findAll();
         List<equipos> opcion2=equipRep.findAll();
-        List<String> esto=new ArrayList<>();
-        esto.add("uno");
-        esto.add("dos");
-        esto.add("tres");
-        esto.add("cuatro");
-        esto.add("cinco");
 
         model.addAttribute("equipo", equipo);
         model.addAttribute("opcion", opcion1);
-        model.addAttribute("opcion2",esto);
+        model.addAttribute("opcion2",opcion2);
 
         model.addAttribute("title","Alquiler- Agregar");
         return "alquiler_agregar"; //TODO: uso de los cambios
     }
 
     @RequestMapping(value = "/add", method=RequestMethod.POST)
-    public String agregar2(Model model, @ModelAttribute("equipo") alquiler equipo, BindingResult bindingResult){
+    public String agregar2(@RequestParam("opcionequi") List<Long> seleccion, @RequestParam("opcioncli") Long sclient, Model model, @ModelAttribute("equipo") alquiler equipo, BindingResult bindingResult){
 
         if (bindingResult.hasErrors()) {
         }
+        clientes cli=clientRep.buscar(sclient);
+
+        Set<equipos> eq=new HashSet<>();
+        if(seleccion!=null){
+            for (long e:seleccion){
+                equipos ep=equipRep.buscar(e);
+                //System.out.println("Nombre seleccion:"+ep.getNombre());
+                eq.add(ep);
+            }
+        }
+
+        for (equipos ep:eq){
+            System.out.println("Nombre seleccion:"+ep.getNombre());
+        }
+
+        Date date1=null;
+        Date date2=null;
+        if((equipo.getExtra1() != null && !equipo.getExtra1().isEmpty()) || (equipo.getExtra2() != null && !equipo.getExtra2().isEmpty())) {
+            try {
+                DateFormat formatter;
+                formatter = new SimpleDateFormat("yyyy-MM-dd");
+                date1 = formatter.parse(equipo.getExtra1());
+                date2 = formatter.parse(equipo.getExtra2());
+            } catch (java.text.ParseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+        Calendar cal1 = new GregorianCalendar();
+        Calendar cal2 = new GregorianCalendar();
+        cal1.setTime(date1);
+        cal2.setTime(date2);
+        long days=daysBetween(cal1.getTime(),cal2.getTime());
 
         alquiler ingresar=new alquiler();
-        //ingresar.setNombre(equipo.getNombre());
-        //ingresar.setFamilia(equipo.getFamilia());
-        //ingresar.setSub_familia(equipo.getSub_familia());
-        //ingresar.setCantidad(equipo.getCantidad());
-        //ingresar.setCosto(equipo.getCosto());
+        ingresar.setCliente(cli);
+        //ingresar.setEquipo(equipo.getFamilia());
+        ingresar.setExtra1(equipo.getExtra1());
+        ingresar.setExtra2(equipo.getExtra2());
+        ingresar.setFecha_prestamo(date1);
+        ingresar.setFecha_entrega(date2);
+        ingresar.setDias(days);
+        ingresar.setPendiente(true);
         alquilerRep.save(ingresar);
 
-        //System.out.println(" ----CLIENTES---");
+        List<alquiler> litapp=alquilerRep.buscarUltimo();
+        alquiler litap=litapp.get(0);
+        System.out.println("ID: "+litap.getId()+" cliente:"+litap.getCliente().getNombre()+" fecha1:" +litap.getExtra1()+" fecha2:"+litap.getExtra2());
 
-        //System.out.println("NOMBRE:"+equipo.getNombre()+" F:"+ equipo.getCedula()+" fecha:"+ingresar.getBirth_date());
+        Set<equipoSolo> inv=new HashSet<>();
+        for(equipos ep: eq){
+            equipoSolo ess=new equipoSolo();
+            ess.setAsociado(ep);
+            ess.setCantidad(1L);
+            ess.setOrden_alquiler(litap);
+            equipssRep.save(ess);
+        }
 
-        System.out.println("LLEGO AQUI");
-        return "redirect:/equipo/"; //TODO: uso de los cambios
+        List<alquiler> litapp2=alquilerRep.buscarUltimo();
+        alquiler lita=litapp2.get(0);
+        System.out.println("ID: "+lita.getId()+" cliente:"+lita.getCliente().getNombre()+" fecha1:" +lita.getExtra1()+" fecha2:"+lita.getExtra2()+" equipos"+ lita.getEquipo().size());
+
+
+        return "redirect:/alquiler/"; //TODO: uso de los cambios
     }
 
     @RequestMapping(value = "/lista", method=RequestMethod.GET)
@@ -139,5 +190,9 @@ public class alquilerControlador {
 
         model.addAttribute("title","Alquiler-datos");
         return "alquiler_ver"; //TODO: uso de los cambios
+    }
+
+    public long daysBetween(Date d1, Date d2) {
+        return (long) ( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
     }
 }

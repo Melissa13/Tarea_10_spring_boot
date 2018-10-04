@@ -14,21 +14,33 @@
             <div class="row2">
                 <div class="col-md-4 input-separador">
                     <label>Cliente</label>
-                    <@spring.formSingleSelect "equipo.cliente", opcion, "class='form-control' style='width: 370px'"/>
+                    <#if opcion2??>
+                            <select name="opcioncli" style="width: 60%;" class="form-control" >
+                                <#list opcion as op>
+                                    <option value="${op.getId()}">${op.getCedula()} - ${op.getNombre()}</option>
+                                </#list>
+                            </select>
+                    </#if>
                 </div>
                 <div class="col-md-4 input-separadorb">
                     <label>Equipos(Por defecto 1 canidad)</label>
-                    <@spring.formMultiSelect "equipo.equipo2", opcion2, "class='form-control' style='width: 370px'"/>
+                    <#if opcion2??>
+                            <select name="opcionequi" style="width: 60%;" class="form-control" multiple>
+                                <#list opcion2 as op2>
+                                    <option value="${op2.getId()}">${op2.getId()} - ${op2.getNombre()}</option>
+                                </#list>
+                            </select>
+                    </#if>
                 </div>
             </div>
             <div class="row2">
                 <div class="col-md-4 input-separador">
                     <label>Fecha del prestamo</label>
-                    <@spring.formInput "equipo.extra1" "class='form-control'" "date"/>
+                    <@spring.formInput "equipo.extra1" "class='form-control' required" "date"/>
                 </div>
                 <div class="col-md-4 input-separadorb">
                     <label>Fecha de entrega</label>
-                    <@spring.formInput "equipo.extra2" "class='form-control'" "date"/>
+                    <@spring.formInput "equipo.extra2" "class='form-control' required" "date"/>
                 </div>
             </div>
             <br/>

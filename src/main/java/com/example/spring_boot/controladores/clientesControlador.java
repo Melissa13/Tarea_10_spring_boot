@@ -71,6 +71,7 @@ public class clientesControlador {
         ingresar.setCedula(cliente.getCedula());
         ingresar.setBirth_date(date);
         ingresar.setGenero(cliente.getGenero());
+        ingresar.setExtra(cliente.getExtra());
         clientRep.save(ingresar);
 
         //System.out.println(" ----CLIENTES---");
@@ -100,6 +101,65 @@ public class clientesControlador {
 
         model.addAttribute("title","Clientes- Borrar");
         return "redirect:/client/lista/"; //TODO: uso de los cambios
+    }
+
+    @RequestMapping(value = "/edit/{id}", method=RequestMethod.GET)
+    public String editar(@PathVariable Long id,Model model){
+
+        clientes cc=clientRep.buscar(id);
+        List<String> opciones=new ArrayList<>();
+        opciones.add("Masculino");
+        opciones.add("Femenino");
+
+        model.addAttribute("cliente", cc);
+        model.addAttribute("opcion", opciones);
+
+        model.addAttribute("title","Clientes- Editar");
+        return "cliente_edit"; //TODO: uso de los cambios
+    }
+
+    @RequestMapping(value = "/edit/{id}", method=RequestMethod.POST)
+    public String editar2(@PathVariable Long id,Model model, @ModelAttribute("cliente") clientes cliente, BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()) {
+        }
+        clientes ingresar=clientRep.buscar(id);
+
+        Date date=null;
+        if(cliente.getExtra() != null && !cliente.getExtra().isEmpty()) {
+            try {
+                DateFormat formatter;
+                formatter = new SimpleDateFormat("yyyy-MM-dd");
+                date = formatter.parse(cliente.getExtra());
+                System.out.println(date);
+            } catch (java.text.ParseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        ingresar.setNombre(cliente.getNombre());
+        ingresar.setBirth_place(cliente.getBirth_place());
+        ingresar.setCedula(cliente.getCedula());
+        ingresar.setBirth_date(date);
+        ingresar.setGenero(cliente.getGenero());
+        ingresar.setExtra(cliente.getExtra());
+        clientRep.save(ingresar);
+
+        //System.out.println(" ----CLIENTES---");
+        System.out.println("NOMBRE:"+cliente.getNombre()+" CEDULA:"+ cliente.getCedula()+" fecha:"+ingresar.getBirth_date());
+
+        System.out.println("LLEGO AQUI");
+        return "redirect:/client/ver/"+ingresar.getId(); //TODO: uso de los cambios
+    }
+
+    @RequestMapping(value = "/ver/{id}", method=RequestMethod.GET)
+    public String vista(@PathVariable Long id, Model model){
+
+        clientes cc=clientRep.buscar(id);
+        model.addAttribute("cliente", cc);
+
+        model.addAttribute("title","Clientes-datos");
+        return "cliente_ver"; //TODO: uso de los cambios
     }
 
 }

@@ -22,8 +22,8 @@
                                 <#list lista as cliente>
                                 <tr><td>${cliente.getCedula()?string["0"]}</td>
                                     <td>${cliente.getNombre()}</td>
-                                    <td><a href="/client/" class="btn-normal btn-extra" style="float: left; margin-left: 20px">Ver</a></td>
-                                    <td><a href="/client/" class="btn-normal btn-extra" style="float: left; margin-left: 20px">Editar</a></td>
+                                    <td><a href="/client/ver/${cliente.getId()?string["0"]}" class="btn-normal btn-extra" style="float: left; margin-left: 20px">Ver</a></td>
+                                    <td><a href="/client/edit/${cliente.getId()?string["0"]}" class="btn-normal btn-extra" style="float: left; margin-left: 20px">Editar</a></td>
                                     <td><a href="/client/delete/${cliente.getId()?string["0"]}" class="btn-normal btn-extra" style="float: left; margin-left: 20px">Borrar</a></td>
                                 </tr>
                                 </#list>

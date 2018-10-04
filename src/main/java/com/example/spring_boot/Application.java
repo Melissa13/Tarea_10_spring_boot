@@ -45,10 +45,10 @@ public class Application {
             System.out.println("NOMBRE:"+cc.getNombre()+" ID:"+cc.getId()+" NACIMIENTO: "+ cc.getBirth_date()+" CEDULA:"+ cc.getCedula()+" LUGAR: "+cc.getBirth_place());
         }
 
-        Long id= 1L;
-        clientes ac=clientRep.buscar(id);
+        //Long id= 1L;
+        //clientes ac=clientRep.buscar(id);
 
-        System.out.println("NOMBRE:"+ac.getNombre()+" ID:"+ac.getId());
+        //System.out.println("NOMBRE:"+ac.getNombre()+" ID:"+ac.getId());
 
         //c.setNombre("Missing");
 

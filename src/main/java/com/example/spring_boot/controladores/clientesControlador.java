@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
@@ -46,7 +43,7 @@ public class clientesControlador {
         model.addAttribute("opcion", opciones);
         model.addAttribute("fecha",fecha);
 
-        model.addAttribute("title","Clientes- Inicio");
+        model.addAttribute("title","Clientes- Agregar");
         return "cliente_agregar"; //TODO: uso de los cambios
     }
 
@@ -81,8 +78,28 @@ public class clientesControlador {
         System.out.println("NOMBRE:"+cliente.getNombre()+" CEDULA:"+ cliente.getCedula()+" fecha:"+ingresar.getBirth_date());
 
         System.out.println("LLEGO AQUI");
-        model.addAttribute("title","Clientes- Inicio");
         return "redirect:/client/"; //TODO: uso de los cambios
+    }
+
+    @RequestMapping(value = "/lista", method=RequestMethod.GET)
+    public String lista(Model model){
+
+        List<clientes> client= clientRep.findAll();
+
+
+        model.addAttribute("lista", client);
+        model.addAttribute("title","Clientes- Lista");
+        return "cliente_lista"; //TODO: uso de los cambios
+    }
+
+    @RequestMapping(value = "/delete/{id}", method=RequestMethod.GET)
+    public String borrar(@PathVariable Long id, Model model){
+
+        clientes cc=clientRep.buscar(id);
+        clientRep.delete(cc);
+
+        model.addAttribute("title","Clientes- Borrar");
+        return "redirect:/client/lista/"; //TODO: uso de los cambios
     }
 
 }

@@ -18,7 +18,7 @@
         <br/>
         <br/>
         <div>
-            <a href="#blog" class="btn-normal btn-extra">Lista de clientes</a>
+            <a href="/client/lista" class="btn-normal btn-extra">Lista de clientes</a>
         </div>
     </center>
     </div>

@@ -14,8 +14,8 @@
             <div class="row2">
                 <div class="col-md-4 input-separador">
                     <label>Cliente</label>
-                    <#if opcion2??>
-                            <select name="opcioncli" style="width: 60%;" class="form-control" >
+                    <#if opcion??>
+                            <select name="opcioncli" style="width: 100%;" class="form-control" >
                                 <#list opcion as op>
                                     <option value="${op.getId()}">${op.getCedula()} - ${op.getNombre()}</option>
                                 </#list>

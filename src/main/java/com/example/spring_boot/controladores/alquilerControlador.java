@@ -157,33 +157,53 @@ public class alquilerControlador {
     public String editar(@PathVariable Long id,Model model){
 
         alquiler cc=alquilerRep.buscar(id);
+        List<clientes> opcion1=clientRep.findAll();
 
         model.addAttribute("equipo", cc);
+        model.addAttribute("opcion", opcion1);
 
         model.addAttribute("title","Alquiler- Editar");
         return "alquiler_edit"; //TODO: uso de los cambios
     }
 
     @RequestMapping(value = "/edit/{id}", method=RequestMethod.POST)
-    public String editar2(@PathVariable Long id,Model model, @ModelAttribute("equipo") alquiler equipo, BindingResult bindingResult){
+    public String editar2(@PathVariable Long id,@RequestParam("opcioncli") Long sclient, Model model, @ModelAttribute("equipo") alquiler equipo, BindingResult bindingResult){
 
         if (bindingResult.hasErrors()) {
         }
-        alquiler ingresar=alquilerRep.buscar(id);
+        clientes cli=clientRep.buscar(sclient);
 
-        //ingresar.setNombre(equipo.getNombre());
-        //ingresar.setNombre(equipo.getNombre());
-        //ingresar.setFamilia(equipo.getFamilia());
-        //ingresar.setSub_familia(equipo.getSub_familia());
-        //ingresar.setCantidad(equipo.getCantidad());
-        //ingresar.setCosto(equipo.getCosto());
+        Date date1=null;
+        Date date2=null;
+        if((equipo.getExtra1() != null && !equipo.getExtra1().isEmpty()) || (equipo.getExtra2() != null && !equipo.getExtra2().isEmpty())) {
+            try {
+                DateFormat formatter;
+                formatter = new SimpleDateFormat("yyyy-MM-dd");
+                date1 = formatter.parse(equipo.getExtra1());
+                date2 = formatter.parse(equipo.getExtra2());
+            } catch (java.text.ParseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+        Calendar cal1 = new GregorianCalendar();
+        Calendar cal2 = new GregorianCalendar();
+        cal1.setTime(date1);
+        cal2.setTime(date2);
+        long days=daysBetween(cal1.getTime(),cal2.getTime());
+
+        alquiler ingresar=alquilerRep.buscar(id);
+        ingresar.setCliente(cli);
+        ingresar.setExtra1(equipo.getExtra1());
+        ingresar.setExtra2(equipo.getExtra2());
+        ingresar.setFecha_prestamo(date1);
+        ingresar.setFecha_entrega(date2);
+        ingresar.setDias(days);
+        ingresar.setPendiente(equipo.isPendiente());
         alquilerRep.save(ingresar);
 
-        //System.out.println(" ----CLIENTES---");
-        //System.out.println("NOMBRE:"+equipo.getNombre()+" CEDULA:"+ equipo.getCedula()+" fecha:"+ingresar.getBirth_date());
-
-        System.out.println("LLEGO AQUI");
-        return "redirect:/equipo/ver/"+ingresar.getId(); //TODO: uso de los cambios
+        return "redirect:/alquiler/ver/"+ingresar.getId(); //TODO: uso de los cambios
     }
 
     @RequestMapping(value = "/ver/{id}", method=RequestMethod.GET)

@@ -6,7 +6,7 @@
 
     <#if alquiler??>
     <div class="section-heading separador">
-        <center><h1><em>Equipo ID:#${alquiler.getId()?string["0"]}</em> - Datos</h1></center>
+        <center><h1><em>Alquiler ID:#${alquiler.getId()?string["0"]}</em> - Datos</h1></center>
     </div>
     <legend></legend>
     <div>

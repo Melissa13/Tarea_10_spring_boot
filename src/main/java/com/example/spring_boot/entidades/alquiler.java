@@ -114,6 +114,6 @@ public class alquiler implements Serializable{
 
     public long days(Date d1) {
         Date today = Calendar.getInstance().getTime();
-        return (long) ( (today.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+        return (long) ( (d1.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
     }
 }

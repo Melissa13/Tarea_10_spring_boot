@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -31,18 +32,27 @@ public class clientesControlador {
     public String agregar(Model model){
 
         clientes cliente = new clientes();
+        List<String> opciones=new ArrayList<>();
+        opciones.add("Masculino");
+        opciones.add("Femenino");
+
         model.addAttribute("cliente", cliente);
+        model.addAttribute("opcion", opciones);
 
         model.addAttribute("title","Clientes- Inicio");
         return "cliente_agregar"; //TODO: uso de los cambios
     }
 
     @RequestMapping(value = "/add", method=RequestMethod.POST)
-    public String agregar2(Model model, @ModelAttribute("cliente") clientes cliente, BindingResult bindingResult){
+    public String agregar2(Model model, @ModelAttribute("cliente") clientes cliente,  BindingResult bindingResult){
 
-        if (!bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             System.out.println("LLEGO AQUI, ERROR");
         }
+        System.out.println(" ----CLIENTES---");
+
+        System.out.println("NOMBRE:"+cliente.getNombre()+" CEDULA:"+ cliente.getCedula()+" Genero:"+cliente.getGenero());
+
         System.out.println("LLEGO AQUI");
         model.addAttribute("title","Clientes- Inicio");
         return "clientes"; //TODO: uso de los cambios

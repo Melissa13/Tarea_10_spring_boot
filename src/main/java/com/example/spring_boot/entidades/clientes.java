@@ -17,14 +17,14 @@ public class clientes implements Serializable{
     @Temporal(TemporalType.DATE)
     private Date birth_date;
     private String birth_place;
-    private boolean genero;
+    private String genero;
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
     private Set<alquiler> historiales;
 
     public clientes() {
     }
 
-    public clientes(long id, long cedula, byte foto, String nombre, Date birth_date, String birth_place, boolean genero, Set<alquiler> historiales) {
+    public clientes(long id, long cedula, byte foto, String nombre, Date birth_date, String birth_place, String genero, Set<alquiler> historiales) {
         this.id = id;
         this.cedula = cedula;
         this.foto = foto;
@@ -67,12 +67,12 @@ public class clientes implements Serializable{
         this.nombre = nombre;
     }
 
-    public Date getNacimiento() {
+    public Date getBirth_date() {
         return birth_date;
     }
 
-    public void setNacimiento(Date edad) {
-        this.birth_date = edad;
+    public void setBirth_date(Date birth_date) {
+        this.birth_date = birth_date;
     }
 
     public String getBirth_place() {
@@ -83,11 +83,11 @@ public class clientes implements Serializable{
         this.birth_place = birth_place;
     }
 
-    public boolean isGenero() {
+    public String getGenero() {
         return genero;
     }
 
-    public void setGenero(boolean genero) {
+    public void setGenero(String genero) {
         this.genero = genero;
     }
 

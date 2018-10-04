@@ -31,7 +31,7 @@ public class Application {
         clientes c=new clientes();
         c.setNacimiento(today);
         c.setCedula(l);
-        c.setGenero(false);
+        c.setGenero("Masculino");
         c.setNombre("Pedro");
         c.setBirth_place("Santiago");
         clientRep.save(c);*/

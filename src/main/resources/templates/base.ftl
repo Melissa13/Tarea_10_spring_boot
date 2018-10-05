@@ -49,7 +49,7 @@
                 <li><a href="/client/">Clientes</a></li>
                 <li><a href="/equipo/">Equipos</a></li>
                 <li><a href="/alquiler/">Alquiler</a></li>
-                <li><a href="#blog">Historial</a></li>
+                <li><a href="/historial/">Historial</a></li>
                 <li><a href="#contact">Contact Us</a></li>
             </ul>
     </div>
@@ -90,7 +90,7 @@
                 </a>
             </li>
             <li>
-                <a href="#blog">
+                <a href="/historial/" class="letra-color">
                     <span class="rect"></span>
                     <span class="circle"></span>
                     Historial

@@ -28,7 +28,7 @@ public class LoginControlador {
     public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
 
         if (userService.validateUserAccount(username, password))
-            return "redirect:/AlquiService";
+            return "redirect:/equipo";
         else
             return "redirect:/login?error=INVALID%20USER%20ACCOUNT";
     }

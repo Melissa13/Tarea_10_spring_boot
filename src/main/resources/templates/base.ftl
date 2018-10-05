@@ -97,10 +97,15 @@
                 </a>
             </li>
             <li>
-                <a href="#contact">
+                <a href="/direc" class="letra-color">
                     <span class="rect"></span>
                     <span class="circle"></span>
-                    Contact Us
+                    Español
+                </a>/
+                <a href="/direcb" class="letra-color">
+                    <span class="rect"></span>
+                    <span class="circle"></span>
+                    Ingles
                 </a>
             </li>
             <li>

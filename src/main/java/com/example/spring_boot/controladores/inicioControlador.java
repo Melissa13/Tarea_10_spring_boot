@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Calendar;
 import java.util.Date;
@@ -45,5 +46,21 @@ public class inicioControlador {
 
         model.addAttribute("title","Clientes- Inicio");
         return "index"; //TODO: uso de los cambios
+    }
+
+    @RequestMapping(value = "/direc", method=RequestMethod.GET)
+    public static String makeUrl(HttpServletRequest request)
+    {
+        String referrer = request.getHeader("referer");
+        System.out.println(referrer);
+        return "redirect:"+referrer+"?lang=es";
+    }
+
+    @RequestMapping(value = "/direcb", method=RequestMethod.GET)
+    public static String makeUrlb(HttpServletRequest request)
+    {
+        String referrer = request.getHeader("referer");
+        System.out.println(referrer);
+        return "redirect:"+referrer+"?lang=en";
     }
 }

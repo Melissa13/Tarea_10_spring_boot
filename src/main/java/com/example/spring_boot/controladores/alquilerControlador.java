@@ -50,10 +50,16 @@ public class alquilerControlador {
         alquiler equipo = new alquiler();
         List<clientes> opcion1=clientRep.findAll();
         List<equipos> opcion2=equipRep.findAll();
+        List<equipos> eq=new ArrayList<>();
+        for(equipos e: opcion2){
+            if(e.getDisponibles()>0){
+                eq.add(e);
+            }
+        }
 
         model.addAttribute("equipo", equipo);
         model.addAttribute("opcion", opcion1);
-        model.addAttribute("opcion2",opcion2);
+        model.addAttribute("opcion2",eq);
 
         model.addAttribute("title","Alquiler- Agregar");
         return "alquiler_agregar"; //TODO: uso de los cambios
@@ -121,6 +127,12 @@ public class alquilerControlador {
             ess.setCantidad(1L);
             ess.setOrden_alquiler(litap);
             equipssRep.save(ess);
+
+            //disminuyendo existencias
+            equipos disminuir=equipRep.buscar(ep.getId());
+            Long dato=disminuir.getDisponibles()-1;
+            disminuir.setDisponibles(dato);
+            equipRep.save(disminuir);
         }
 
 
@@ -131,7 +143,6 @@ public class alquilerControlador {
     public String lista(Model model){
 
         List<alquiler> equipo= alquilerRep.findAll();
-
 
         model.addAttribute("lista", equipo);
         model.addAttribute("title","Alquiler- Lista");
@@ -144,8 +155,14 @@ public class alquilerControlador {
         alquiler cc=alquilerRep.buscar(id);
         for(equipoSolo esto:cc.getEquipo()){
             equipoSolo eliminar=esto;
-            equipssRep.delete(eliminar);
 
+            //disminuyendo existencias
+            equipos disminuir=eliminar.getAsociado();
+            Long dato=disminuir.getDisponibles()+eliminar.getCantidad();
+            disminuir.setDisponibles(dato);
+            equipRep.save(disminuir);
+
+            equipssRep.delete(eliminar);
         }
         alquilerRep.delete(cc);
 

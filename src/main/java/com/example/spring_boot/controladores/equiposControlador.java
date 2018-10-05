@@ -21,6 +21,8 @@ import java.util.List;
 public class equiposControlador {
     @Autowired
     public EquiposRepositorio equipRep;
+    @Autowired
+    public EquiopoSoloRepositorio equipssRep;
 
     @RequestMapping(value = "/", method=RequestMethod.GET)
     public String index(Model model, HttpSession session){
@@ -106,8 +108,16 @@ public class equiposControlador {
         ingresar.setNombre(equipo.getNombre());
         ingresar.setFamilia(equipo.getFamilia());
         ingresar.setSub_familia(equipo.getSub_familia());
-        ingresar.setCantidad(equipo.getCantidad());
         ingresar.setCosto(equipo.getCosto());
+
+        /*Long dato=equipo.getCantidad()-ingresar.getDisponibles();
+        if(dato>0){
+
+        }
+        else {
+
+        }*/
+        ingresar.setCantidad(equipo.getCantidad());
         ingresar.setDisponibles(equipo.getCantidad());
         equipRep.save(ingresar);
 
@@ -126,5 +136,17 @@ public class equiposControlador {
 
         model.addAttribute("title","Equipos-datos");
         return "equipos_ver"; //TODO: uso de los cambios
+    }
+
+    //calcular cantidad de equipos alquilados
+    public long prestamos(equipos e){
+        long n=0;
+        List<equipoSolo> cant=equipssRep.findAll();
+        for (equipoSolo esto:cant){
+            if(esto.getAsociado().getNombre().equals(e.getNombre())){
+                n+=esto.getCantidad();
+            }
+        }
+        return  n;
     }
 }

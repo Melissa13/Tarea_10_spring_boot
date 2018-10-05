@@ -25,9 +25,9 @@
                 <div class="col-md-4 input-separadorb">
                     <label>Equipos(Por defecto 1 canidad)</label>
                     <#if opcion2??>
-                            <select name="opcionequi" style="width: 60%;" class="form-control" multiple>
+                            <select name="opcionequi" style="width: 100%;" class="form-control" multiple>
                                 <#list opcion2 as op2>
-                                    <option value="${op2.getId()}">${op2.getId()} - ${op2.getNombre()}</option>
+                                    <option value="${op2.getId()}">${op2.getId()} - ${op2.getNombre()} - Cant: ${op2.getDisponibles()}</option>
                                 </#list>
                             </select>
                     </#if>

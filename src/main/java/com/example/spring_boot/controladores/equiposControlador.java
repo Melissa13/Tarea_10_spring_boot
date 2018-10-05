@@ -110,16 +110,24 @@ public class equiposControlador {
         ingresar.setSub_familia(equipo.getSub_familia());
         ingresar.setCosto(equipo.getCosto());
 
-        /*Long dato=equipo.getCantidad()-ingresar.getDisponibles();
-        if(dato>0){
+        boolean noaceptado=false;
+        Long dato=prestamos(ingresar);
+        if(equipo.getCantidad()>dato){
+            ingresar.setCantidad(equipo.getCantidad());
+            long actual=equipo.getCantidad()-dato;
+            ingresar.setDisponibles(actual);
 
         }
         else {
+            noaceptado=true;
+        }
 
-        }*/
-        ingresar.setCantidad(equipo.getCantidad());
-        ingresar.setDisponibles(equipo.getCantidad());
         equipRep.save(ingresar);
+
+        if(noaceptado){
+            //redireccion pagina de error
+            return "redirect:/equipo/erroneo/"+ingresar.getId();
+        }
 
         //System.out.println(" ----CLIENTES---");
         //System.out.println("NOMBRE:"+equipo.getNombre()+" CEDULA:"+ equipo.getCedula()+" fecha:"+ingresar.getBirth_date());
@@ -136,6 +144,17 @@ public class equiposControlador {
 
         model.addAttribute("title","Equipos-datos");
         return "equipos_ver"; //TODO: uso de los cambios
+    }
+
+    @RequestMapping(value = "/erroneo/{id}", method=RequestMethod.GET)
+    public String errorcant(@PathVariable Long id, Model model){
+
+        equipos cc=equipRep.buscar(id);
+        model.addAttribute("equipo", cc);
+        //equipo/lista/
+
+        model.addAttribute("title","Equipos-error");
+        return "erroneo"; //TODO: uso de los cambios
     }
 
     //calcular cantidad de equipos alquilados

@@ -1,7 +1,7 @@
 <#import "/spring.ftl" as spring />
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -45,11 +45,11 @@
     <!--/.navbar-header-->
     <div id="main-nav" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/">Inicio</a></li>
-                <li><a href="/client/">Clientes</a></li>
-                <li><a href="/equipo/">Equipos</a></li>
-                <li><a href="/alquiler/">Alquiler</a></li>
-                <li><a href="/historial/">Historial</a></li>
+                <li><a href="/"><@spring.message "home"/></a></li>
+                <li><a href="/client/"<@spring.message "cliente"/></a></li>
+                <li><a href="/equipo/"><@spring.message "equipo"/></a></li>
+                <li><a href="/alquiler/"><@spring.message "alquiler"/></a></li>
+                <li><a href="/historial/"><@spring.message "historial"/></a></li>
                 <li><a href="#contact">Contact Us</a></li>
             </ul>
     </div>
@@ -65,35 +65,35 @@
                 <a href="/" class="letra-color">
                     <span class="rect"></span>
                     <span class="circle"></span>
-                    Inicio
+                    <@spring.message "home"/>
                 </a>
             </li>
             <li>
                 <a href="/client/" class="letra-color">
                     <span class="rect"></span>
                     <span class="circle"></span>
-                    Clientes
+                    <@spring.message "cliente"/>
                 </a>
             </li>
             <li>
                 <a href="/equipo/" class="letra-color">
                     <span class="rect"></span>
                     <span class="circle"></span>
-                    Equipos
+                    <@spring.message "equipo"/>
                 </a>
             </li>
             <li>
                 <a href="/alquiler/" class="letra-color">
                     <span class="rect"></span>
                     <span class="circle"></span>
-                    Alquiler
+                    <@spring.message "alquiler"/>
                 </a>
             </li>
             <li>
                 <a href="/historial/" class="letra-color">
                     <span class="rect"></span>
                     <span class="circle"></span>
-                    Historial
+                    <@spring.message "historial"/>
                 </a>
             </li>
             <li>
@@ -102,6 +102,9 @@
                     <span class="circle"></span>
                     Contact Us
                 </a>
+            </li>
+            <li>
+
             </li>
         </ul>
     </div>

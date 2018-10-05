@@ -1,35 +1,61 @@
 package com.example.spring_boot.entidades.seguridad;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
-public class usuario {
+@Table(name = "ususario")
+public class usuario implements Serializable {
 
     @Id
+    @Column(name = "username")
     private String username;
+    @Column(name = "firstname")
+    private String firstName;
+    @Column(name = "lastname")
+    private String lastName;
+    @Column(name = "password")
     private String password;
-    private String name;
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<rol> roles;
+    @Column(name = "permission")
+    private boolean admin;
 
-    public usuario() {
+    public usuario(){
+
     }
 
-    public usuario(String username, String password, String name, Set<rol> roles) {
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.roles = roles;
+    public usuario(String username, String firstName, String lastName, String password, boolean admin){
+        this.setUsername(username);
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setAdmin(admin);
     }
 
+    // Getters and Setters
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {
@@ -40,19 +66,11 @@ public class usuario {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public boolean isAdmin() {
+        return admin;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<rol> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<rol> roles) {
-        this.roles = roles;
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 }

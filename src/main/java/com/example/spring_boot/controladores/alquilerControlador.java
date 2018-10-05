@@ -136,7 +136,7 @@ public class alquilerControlador {
         }
 
 
-        return "redirect:/alquiler/"; //TODO: uso de los cambios
+        return "redirect:/alquiler/ver/"+litap.getId(); //TODO: uso de los cambios
     }
 
     @RequestMapping(value = "/lista", method=RequestMethod.GET)
@@ -236,19 +236,67 @@ public class alquilerControlador {
     @RequestMapping(value = "/mas/{id}", method=RequestMethod.GET)
     public String sumar(@PathVariable Long id, Model model){
 
-        alquiler cc=alquilerRep.buscar(id);
+
+        equipoSolo cc=equipssRep.buscar(id);
+        if(cc.getAsociado().getDisponibles()<=0){
+            System.out.println("ENTRA AL ERROR antes");
+            return "redirect:/alquiler/erroneo/"+cc.getOrden_alquiler().getId();
+        }
+
+        cc.setCantidad(cc.getCantidad()+1);
+        equipssRep.save(cc);
+
+        equipos ee=equipRep.buscar(cc.getAsociado().getId());
+        ee.setDisponibles(ee.getDisponibles()-1);
+        equipRep.save(ee);
 
         model.addAttribute("title","Equipos- Inicio");
-        return "alquiler"; //TODO: uso de los cambios
+        return "redirect:/alquiler/ver/"+cc.getOrden_alquiler().getId();
     }
 
     @RequestMapping(value = "/menos/{id}", method=RequestMethod.GET)
     public String restar(@PathVariable Long id, Model model){
 
+        equipoSolo cc=equipssRep.buscar(id);
+        if((cc.getCantidad()-1)<=0){
+            return "redirect:/alquiler/erroneo2/"+cc.getOrden_alquiler().getId();
+        }
+
+        cc.setCantidad(cc.getCantidad()-1);
+        equipssRep.save(cc);
+
+        equipos ee=equipRep.buscar(cc.getAsociado().getId());
+        ee.setDisponibles(ee.getDisponibles()+1);
+        equipRep.save(ee);
+
+        model.addAttribute("title","Alquiler- Inicio");
+        return "redirect:/alquiler/ver/"+cc.getOrden_alquiler().getId(); //TODO: uso de los cambios
+    }
+
+    @RequestMapping(value = "/erroneo/{id}", method=RequestMethod.GET)
+    public String errorA(@PathVariable Long id, Model model){
+
+        System.out.println("ENTRA AL ERROR");
+        alquiler cc=alquilerRep.buscar(id);
+        System.out.println("Esto: "+cc.getCliente().getNombre());
+
+        model.addAttribute("msg1","aumentar");
+        model.addAttribute("msg2","Insuficiencia de equipos disponibles para alquilar");
+        model.addAttribute("alq",cc);
+        model.addAttribute("title","Alquiler- Error");
+        return "alquiler_error"; //TODO: uso de los cambios
+    }
+
+    @RequestMapping(value = "/erroneo2/{id}", method=RequestMethod.GET)
+    public String errorB(@PathVariable Long id, Model model){
+
         alquiler cc=alquilerRep.buscar(id);
 
-        model.addAttribute("title","Equipos- Inicio");
-        return "alquiler"; //TODO: uso de los cambios
+        model.addAttribute("msg1","disminuir");
+        model.addAttribute("msg2","Que la la cantidad seria igual a 0 ");
+        model.addAttribute("alq",cc);
+        model.addAttribute("title","Alquiler- Error");
+        return "alquiler_error"; //TODO: uso de los cambios
     }
 
     //agregar equipos asociados
@@ -273,5 +321,16 @@ public class alquilerControlador {
 
     public long daysBetween(Date d1, Date d2) {
         return (long) ( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+    }
+
+    public long prestamos(equipos e){
+        long n=0;
+        List<equipoSolo> cant=equipssRep.findAll();
+        for (equipoSolo esto:cant){
+            if(esto.getAsociado().getNombre().equals(e.getNombre())){
+                n+=esto.getCantidad();
+            }
+        }
+        return  n;
     }
 }

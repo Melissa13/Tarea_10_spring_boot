@@ -74,7 +74,7 @@
                                 <a href="/alquiler/mas/${esto.getId()?string["0"]}" class="btn-normal btn-extra2" >+</a></h4>
                         </div>
                         <div class="col-md-4 input-separadorb">
-                            <label>Disponibles</label>
+                            <label>Costo total de este equipo ($RD)</label>
                             <h4>${esto.getCantidad()*esto.getAsociado().getCosto()}</h4>
                         </div>
                     </div>

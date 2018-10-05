@@ -126,4 +126,16 @@ public class alquiler implements Serializable{
 
         return suma;
     }
+
+    public Long cantidade(){
+
+        long suma=0;
+
+        for(equipoSolo e: equipo){
+            suma+=e.getCantidad();
+        }
+
+        return suma;
+
+    }
 }

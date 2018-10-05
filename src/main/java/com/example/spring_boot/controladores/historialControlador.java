@@ -38,6 +38,7 @@ public class historialControlador {
             }
         }
 
+        model.addAttribute("cli", client);
         model.addAttribute("lista", equipo2);
         model.addAttribute("title","Historial- Lista");
         return "historial_lista"; //TODO: uso de los cambios

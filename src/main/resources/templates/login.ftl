@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>${title}</title>
+    <title>`Login</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -36,6 +36,7 @@
 					</span>
 
                 <div class="wrap-input100 validate-input" data-validate = "Valid username is required: admin">
+
                     <input class="input100" type="text" name="username" placeholder="Usuario">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">

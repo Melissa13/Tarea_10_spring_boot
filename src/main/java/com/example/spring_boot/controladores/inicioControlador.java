@@ -29,7 +29,7 @@ public class inicioControlador {
         return "inicio"; //TODO: uso de los cambios
     }
 
-    @RequestMapping(value = "/login", method=RequestMethod.GET)
+    /*@RequestMapping(value = "/login", method=RequestMethod.GET)
     public String login(Model model, HttpSession session){
         List<clientes> client= clientRep.findAll();
         System.out.println(" ----CLIENTES---");
@@ -38,7 +38,7 @@ public class inicioControlador {
         }
         model.addAttribute("title","Login");
         return "login"; //TODO: uso de los cambios
-    }
+    }*/
 
     @RequestMapping(value = "/prueba", method=RequestMethod.GET)
     public String prueba(Model model, HttpSession session){

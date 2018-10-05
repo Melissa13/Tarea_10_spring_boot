@@ -22,13 +22,14 @@ public class alquiler implements Serializable{
     private Date fecha_entrega;
     private long dias;
     private boolean pendiente=true;
+    private boolean activo=true;
     private String extra1;
     private String extra2;
 
     public alquiler() {
     }
 
-    public alquiler(long id, clientes cliente, Set<equipoSolo> equipo, Date fecha_prestamo, Date fecha_entrega, long dias, boolean pendiente, String extra1, String extra2) {
+    public alquiler(long id, clientes cliente, Set<equipoSolo> equipo, Date fecha_prestamo, Date fecha_entrega, long dias, boolean pendiente, String extra1, String extra2, boolean activo) {
         this.id = id;
         this.cliente = cliente;
         this.equipo = equipo;
@@ -38,6 +39,7 @@ public class alquiler implements Serializable{
         this.pendiente=pendiente;
         this.extra1=extra1;
         this.extra2=extra2;
+        this.activo=activo;
     }
 
     public long getId() {
@@ -110,6 +112,14 @@ public class alquiler implements Serializable{
 
     public void setExtra2(String extra2) {
         this.extra2 = extra2;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     public long days(Date d1) {

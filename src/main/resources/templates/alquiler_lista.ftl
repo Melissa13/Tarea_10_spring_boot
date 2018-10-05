@@ -21,7 +21,6 @@
                         <th>Ver</th>
                         <th>Editar</th>
                         <th>Borrar</th>
-                        <th>Devolver</th>
                     </tr>
                                 <#list lista as equipo>
                                 <tr><td>${equipo.getId()?string["0"]}</td>
@@ -37,7 +36,6 @@
                                     <td><a href="/alquiler/ver/${equipo.getId()?string["0"]}" class="btn-normal btn-extra" style="float: left; margin-left: 20px">Ver Factura</a></td>
                                     <td><a href="/alquiler/edit/${equipo.getId()?string["0"]}" class="btn-normal btn-extra" style="float: left; margin-left: 20px">Editar</a></td>
                                     <td><a href="/alquiler/delete/${equipo.getId()?string["0"]}" class="btn-normal btn-extra" style="float: left; margin-left: 20px">Borrar</a></td>
-                                    <td><a href="/alquiler/devolver/${equipo.getId()?string["0"]}" class="btn-normal btn-extra" style="float: left; margin-left: 20px">Devolver</a></td>
                                 </tr>
                                 </#list>
                 </table>

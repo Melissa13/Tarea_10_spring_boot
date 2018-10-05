@@ -114,6 +114,7 @@ public class alquilerControlador {
         ingresar.setFecha_entrega(date2);
         ingresar.setDias(days);
         ingresar.setPendiente(true);
+        ingresar.setActivo(true);
         alquilerRep.save(ingresar);
 
         List<alquiler> litapp=alquilerRep.buscarUltimo();
@@ -143,8 +144,14 @@ public class alquilerControlador {
     public String lista(Model model){
 
         List<alquiler> equipo= alquilerRep.findAll();
+        List<alquiler> aux= new ArrayList<>();
+        for(alquiler esto:equipo){
+            if(esto.isActivo()){
+                aux.add(esto);
+            }
+        }
 
-        model.addAttribute("lista", equipo);
+        model.addAttribute("lista", aux);
         model.addAttribute("title","Alquiler- Lista");
         return "alquiler_lista"; //TODO: uso de los cambios
     }
@@ -153,7 +160,7 @@ public class alquilerControlador {
     public String borrar(@PathVariable Long id, Model model){
 
         alquiler cc=alquilerRep.buscar(id);
-        for(equipoSolo esto:cc.getEquipo()){
+        /*for(equipoSolo esto:cc.getEquipo()){
             equipoSolo eliminar=esto;
 
             //disminuyendo existencias
@@ -163,8 +170,10 @@ public class alquilerControlador {
             equipRep.save(disminuir);
 
             equipssRep.delete(eliminar);
-        }
-        alquilerRep.delete(cc);
+        }*/
+        //alquilerRep.delete(cc);
+        cc.setActivo(false);
+        alquilerRep.save(cc);
 
         model.addAttribute("title","Alquiler- Borrar");
         return "redirect:/alquiler/lista/"; //TODO: uso de los cambios

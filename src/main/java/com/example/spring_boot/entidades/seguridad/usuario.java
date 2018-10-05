@@ -29,6 +29,7 @@ public class usuario implements Serializable {
         this.setUsername(username);
         this.setFirstName(firstName);
         this.setLastName(lastName);
+        this.setPassword(password);
         this.setAdmin(admin);
     }
 

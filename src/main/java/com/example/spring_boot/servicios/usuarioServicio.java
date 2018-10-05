@@ -26,6 +26,7 @@ public class usuarioServicio {
         if(isUsernameTaken(username))
             throw new IllegalArgumentException("\n\nThe user name: " + username + " is already taken");
         else
+            System.out.println(password);
             userRepository.save(new usuario(username, firstName, lastName, password, false));
     }
 

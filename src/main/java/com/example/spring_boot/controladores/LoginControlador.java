@@ -34,9 +34,10 @@ public class LoginControlador {
     {
         String username = new String();
         String password = new String();
-        userService.createNewUserAccount("jojo","Joseph","Joestar", "lel");
+
         model.addAttribute("username",username);
         model.addAttribute("password",password);
+
         model.addAttribute("title","login");
 
         return "login_log";
@@ -52,6 +53,8 @@ public class LoginControlador {
         }
         else
         {
+            //userService.deleteUserAccount("jojo");
+            //userService.createNewUserAccount("jojo","Joseph","Joestar", new String("lel"));
             List<usuario> u = userRepositorio.findAll();
             for (usuario uu:u) {
                 System.out.println(uu.getFirstName()+" "+uu.getLastName()+" "+uu.getUsername()+" "+uu.getPassword());

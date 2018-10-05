@@ -299,24 +299,100 @@ public class alquilerControlador {
         return "alquiler_error"; //TODO: uso de los cambios
     }
 
-    //agregar equipos asociados
+    //borrar equipos asociados
     @RequestMapping(value = "/quitar/{id}", method=RequestMethod.GET)
     public String quitar(@PathVariable Long id, Model model){
 
-        alquiler cc=alquilerRep.buscar(id);
+        equipoSolo cc=equipssRep.buscar(id);
+        alquiler also=cc.getOrden_alquiler();
+
+        if((also.getEquipo().size()-1)<=0){
+            return "redirect:/alquiler/erroneo3/"+cc.getOrden_alquiler().getId();
+        }
+
+        //disminuyendo existencias
+        equipos disminuir=cc.getAsociado();
+        Long dato=disminuir.getDisponibles()+cc.getCantidad();
+        disminuir.setDisponibles(dato);
+        equipRep.save(disminuir);
+
+        equipssRep.delete(cc);
+
 
         model.addAttribute("title","Equipos- Inicio");
-        return "alquiler"; //TODO: uso de los cambios
+        return "redirect:/alquiler/ver/"+cc.getOrden_alquiler().getId(); //TODO: uso de los cambios
     }
 
-    //quitar equipos asociados
+    @RequestMapping(value = "/erroneo3/{id}", method=RequestMethod.GET)
+    public String errorC(@PathVariable Long id, Model model){
+
+        alquiler cc=alquilerRep.buscar(id);
+
+        model.addAttribute("msg1","borrar");
+        model.addAttribute("msg2","Que quedaria un alquier sin equipos ");
+        model.addAttribute("alq",cc);
+        model.addAttribute("title","Alquiler- Error");
+        return "alquiler_error"; //TODO: uso de los cambios
+    }
+
+    //agregar equipos asociados
     @RequestMapping(value = "/agregar/{id}", method=RequestMethod.GET)
     public String agregareq(@PathVariable Long id, Model model){
 
         alquiler cc=alquilerRep.buscar(id);
+        Set<equipoSolo> obtenidos=cc.getEquipo(); //equipos obtenidos
+        List<equipos> aux=equipRep.findAll();  //total de equipos
+
+        for (equipoSolo es:obtenidos){
+            aux.remove(es.getAsociado());
+        }
+
+        List<equipos> eq=new ArrayList<>();
+        for(equipos e: aux){
+            if(e.getDisponibles()>0){
+                eq.add(e);
+            }
+        }
+
+        model.addAttribute("opcion2",eq);
+        model.addAttribute("alq",cc);
+        model.addAttribute("title","Alquiler- Equipos");
+        return "alquiler_equipo"; //TODO: uso de los cambios
+    }
+
+    @RequestMapping(value = "/agregar/{id}", method=RequestMethod.POST)
+    public String agregareq2(@PathVariable Long id, @RequestParam("opcionequi") List<Long> seleccion, Model model){
+
+        alquiler cc=alquilerRep.buscar(id);
+
+        System.out.println("---LLega aqui----");
+        Set<equipos> eq=new HashSet<>();
+        if(seleccion!=null){
+            for (long e:seleccion){
+                equipos ep=equipRep.buscar(e);
+                //System.out.println("Nombre seleccion:"+ep.getNombre());
+                eq.add(ep);
+            }
+        }
+
+
+        Set<equipoSolo> inv=new HashSet<>();
+        for(equipos ep: eq){
+            equipoSolo ess=new equipoSolo();
+            ess.setAsociado(ep);
+            ess.setCantidad(1L);
+            ess.setOrden_alquiler(cc);
+            equipssRep.save(ess);
+
+            //disminuyendo existencias
+            equipos disminuir=equipRep.buscar(ep.getId());
+            Long dato=disminuir.getDisponibles()-1;
+            disminuir.setDisponibles(dato);
+            equipRep.save(disminuir);
+        }
 
         model.addAttribute("title","Equipos- Inicio");
-        return "alquiler"; //TODO: uso de los cambios
+        return "redirect:/alquiler/ver/"+cc.getId(); //TODO: uso de los cambios
     }
 
     public long daysBetween(Date d1, Date d2) {
